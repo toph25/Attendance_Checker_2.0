@@ -142,12 +142,12 @@ def doUpload(btn):
                     if tempF == "":
                          main.errorBox("Error","Please enter a file of your class record.")
                     else:
-                         if os.path.isfile(tempF) == False:
+                         if os.path.isfile("C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF) == False:
                               main.errorBox("Error","That file doesn't exist.")
                          elif (tempF[-4:] != ".csv"):
                               main.errorBox("Error","The file must be a .csv file.")
                          else:
-                              errcheck = AddClass(classes,tempN,tempS,tempF)
+                              errcheck = AddClass(classes,tempN,tempS,"C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF)
                               #success
                               if errcheck == 0:
                                    main.infoBox("success","Your class has been uploaded!")
@@ -170,12 +170,12 @@ def doUpload(btn):
                if tempF == "":
                     main.errorBox("Error","Please enter a valid file of your class record.")
                else:
-                    if os.path.isfile(tempF) == False:
+                    if os.path.isfile("C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF) == False:
                          main.errorBox("Error","That file doesn't exist.")
                     elif (tempF[-4:] != ".csv"):
                          main.errorBox("Error","The file must be a .csv file.")
                     else:
-                         errcheck = AddClass(classes,tempN,tempS,tempF)
+                         errcheck = AddClass(classes,tempN,tempS,"C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF)
                          #success
                          if errcheck == 0:
                               main.infoBox("success","Your class has been uploaded!")
@@ -524,7 +524,7 @@ def uploadBtn():
      main.setSticky("nw")
      main.setPadding([10,5])
      main.addButton("Upload",pressUpload,0,0)
-     main.setButtonImage("Upload","upload.gif")
+     main.setButtonImage("Upload","img\upload.gif")
      main.setSticky("")
      main.setPadding([0,0])
 
@@ -540,7 +540,7 @@ def viewBtn():
      main.setSticky("nw")
      main.setPadding([10,5])
      main.addButton("View Class",viewTrigger,0,1)
-     main.setButtonImage("View Class","view.gif")
+     main.setButtonImage("View Class","img\\view.gif")
      main.setSticky("")
      main.hideButton("View Class")
      main.setPadding([0,0])
@@ -557,7 +557,7 @@ def deleteBtn():
      main.setPadding([10,5])
      main.setSticky("nw")
      main.addButton("Delete",pressDelete,0,2)
-     main.setButtonImage("Delete","delete.gif")
+     main.setButtonImage("Delete","img\delete.gif")
      main.setSticky("")
      main.hideButton("Delete")
      main.setPadding([0,0])
@@ -572,7 +572,7 @@ def deleteBtn():
 def checkPresent():
      main.setPadding([5,00])
      main.addButton("Present!",setPresent,3,2)
-     main.setButtonImage("Present!","present.gif")
+     main.setButtonImage("Present!","img\present.gif")
      #main.hideButton("Present!")
      main.setPadding([0,0])
 
@@ -586,7 +586,7 @@ def checkPresent():
 def checkAbsent():
      main.setPadding([5,00])
      main.addButton("Absent!",setAbsent,3,1)
-     main.setButtonImage("Absent!","absent.gif")
+     main.setButtonImage("Absent!","img\\absent.gif")
      #main.hideButton("Absent!")
      main.setPadding([0,0])
 
@@ -600,13 +600,13 @@ def checkAbsent():
 def sessionButton():
      main.setPadding([10,00])
      main.addButton("Previous Session",prevSession,3,0)
-     main.setButtonImage("Previous Session","prev.gif")
+     main.setButtonImage("Previous Session","img\prev.gif")
      #main.hideButton("Previous Session")
      main.setPadding([0,0])
 
      main.setPadding([10,00])
      main.addButton("Next Session",nextSession,3,3)
-     main.setButtonImage("Next Session","next.gif")
+     main.setButtonImage("Next Session","img\\next.gif")
      #main.hideButton("Next Session")
      main.setPadding([0,0])
 
@@ -689,7 +689,7 @@ def vqm():
      main.setStretch("both")
 
      main.setPadding([10,5])
-     main.addImage("qm","format.gif")
+     main.addImage("qm","img\\format.gif")
      
      main.stopSubWindow()
 
@@ -727,7 +727,7 @@ def upMenu():
      main.addButton("Upload Class",doUpload,4,0)
      main.addButton("Cancel",Cancel,4,1)
 
-     main.addLabel("instructions","Please place your class record file in the same\n folder as this program.\n\nThe class record file must be a .csv file",5,0)
+     main.addLabel("instructions","Please place your class record file in csv folder.\n\nThe class record file must be a .csv file",5,0)
 
      main.addButton("See .csv file's content format",viewquemark,6,0)
      #main.hideButton("Absent!")
@@ -965,7 +965,7 @@ read_on_startup()
 main = gui("Attendance Checker")
 main.setLocation(100,0)
 main.setFont(14,"Berlin Sans FB")
-main.setBgImage("background.gif")
+main.setBgImage("img\\background.gif")
 
 menu0()
 upMenu()
