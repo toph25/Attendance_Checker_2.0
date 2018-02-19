@@ -684,6 +684,7 @@ def viewquemark(btn):
 # - creates subwindow and will show .csv file content's format
 def vqm():
      main.startSubWindow("qm","",True)
+     main.setLocation(150,10)
      main.setSticky("news")
      main.setStretch("both")
 
@@ -962,7 +963,7 @@ read_on_startup()
 
 #main = gui("Attendance Checker","800x600")
 main = gui("Attendance Checker")
-main.setLocation(0,0)
+main.setLocation(100,0)
 main.setFont(14,"Berlin Sans FB")
 main.setBgImage("background.gif")
 
