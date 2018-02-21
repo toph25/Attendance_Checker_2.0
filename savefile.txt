@@ -35,7 +35,7 @@ E,A 1
 0 0 0 0 0 
 0 0 0 0 0 
 test2
-10 6
+10 7
 5
 A,B 2
 B,E 5
@@ -47,9 +47,10 @@ E,A 1
 0 0 0 0 0 
 0 0 0 0 0 
 0 0 0 0 0 
-0 0 0 0 0 
-a
-Ellipsis 1
+1 1 1 1 1 
+0 0 1 0 0 
+CS 173 - NKIA
+16 1
 20
 Abong,Jeryl 120
 Ai,Kizuna 112
@@ -58,17 +59,17 @@ Baldoza,Beverly 123
 Bueno,Albert 129
 Cabayao,Charlene 125
 Cabrera,Vhina 126
-Cailing,Emil Rey
+Cailing,Emil Rey 128
 Canlas,Francesca 119
-Cellona,Ma. Clare
+Cellona,Ma. Clare 131
 Lisondra,Justice 124
 Poe,Grace 117
 Poe,Mary 116
-Rebamontan,Edgar Rey
+Rebamontan,Edgar Rey 130
 Salig,Aerona 121
 Shizu,Miyu 113
 Sim,Richard 127
 Sison,Alely 122
 Tanaka,Kou 115
 Taton,Nilyn 118
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 

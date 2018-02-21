@@ -142,12 +142,12 @@ def doUpload(btn):
                     if tempF == "":
                          main.errorBox("Error","Please enter a file of your class record.")
                     else:
-                         if os.path.isfile("C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF) == False:
+                         if os.path.isfile("csv\\" + tempF) == False:
                               main.errorBox("Error","That file doesn't exist.")
                          elif (tempF[-4:] != ".csv"):
                               main.errorBox("Error","The file must be a .csv file.")
                          else:
-                              errcheck = AddClass(classes,tempN,tempS,"C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF)
+                              errcheck = AddClass(classes,tempN,tempS,"csv\\" + tempF)
                               #success
                               if errcheck == 0:
                                    main.infoBox("success","Your class has been uploaded!")
@@ -170,12 +170,12 @@ def doUpload(btn):
                if tempF == "":
                     main.errorBox("Error","Please enter a valid file of your class record.")
                else:
-                    if os.path.isfile("C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF) == False:
+                    if os.path.isfile("csv\\" + tempF) == False:
                          main.errorBox("Error","That file doesn't exist.")
                     elif (tempF[-4:] != ".csv"):
                          main.errorBox("Error","The file must be a .csv file.")
                     else:
-                         errcheck = AddClass(classes,tempN,tempS,"C:\Users\user\Documents\cs 173 N\AttendanceChecker\csv\\" + tempF)
+                         errcheck = AddClass(classes,tempN,tempS,"csv\\" + tempF)
                          #success
                          if errcheck == 0:
                               main.infoBox("success","Your class has been uploaded!")
@@ -322,24 +322,34 @@ def pressView():
           temp.append("Session " + str(currentSession + 1))
           temp.append("")
           # get list of present and absent students in latest session
+          # Updated: Feb. 13, 2018
+          # Improvement Number: 2.4
+          temp.append("")
+          temp.append("Class List:")
+          for stud in classes[index].getstudents():
+               if classes[index].getattendance(stud,-1) == 0:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
+          temp.append("")
+
+          # Updated: Feb. 13, 2018
+          # Improvement Number: 2.5
           temp.append("Present:")
           for stud in classes[index].getstudents():
                if classes[index].getattendance(stud,-1) == 1:
                     temp.append(stud.getname())
                     tempS.append(stud.getname())
-
           temp.append("")
           temp.append("Absent:")
-          for stud in classes[index].getstudents():
-               if classes[index].getattendance(stud,-1) == 0:
-                    temp.append(stud.getname())
-                    tempS.append(stud.getname())
+          temp.append("")
+          temp.append("Excused:")
+          temp.append("")
+          temp.append("Late:")
           # display the class details
           main.updateListItems("classData",temp)
           print("current session -> " + str(currentSession))
           # set list of students in the class being viewed
           studentsNames = tempS
-
 #refreshView
 #created Jan. 31, 2017
 # - functionally identical to pressView, to be called before ending
@@ -365,7 +375,20 @@ def refreshView():
           main.setLabel("curr_session","Session " + str(currentSession + 1))
           
           temp.append("Session " + str(currentSession + 1))
+
+
+          # Updated: Feb. 13,2018
+          # Improvement Number: 2.4
+
+          temp.append("Class List:")
+          for stud in classes[classDataDisplay].getstudents():
+               if classes[classDataDisplay].getattendance(stud,currentSession) == 0:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
           temp.append("")
+
+          # Updated: Feb. 13,2018
+          # Improvement Number: 2.5
           temp.append("Present:")
           for stud in classes[classDataDisplay].getstudents():
                if classes[classDataDisplay].getattendance(stud,currentSession) == 1:
@@ -373,10 +396,10 @@ def refreshView():
                     tempS.append(stud.getname())
           temp.append("")
           temp.append("Absent:")
-          for stud in classes[classDataDisplay].getstudents():
-               if classes[classDataDisplay].getattendance(stud,currentSession) == 0:
-                    temp.append(stud.getname())
-                    tempS.append(stud.getname())
+          temp.append("")
+          temp.append("Excused:")
+          temp.append("")
+          temp.append("Late:")
           main.updateListItems("classData",temp)
           studentsNames = tempS
 
@@ -754,23 +777,32 @@ def viewMenu():
      main.addLabel("class_name",str(currentView),0,0,4)
      main.addLabel("curr_session",str(currentMax),1,0,4)
      main.setSticky("")
+
+     main.setSticky("n")
+     main.startLabelFrame("",2,0,4)
+     main.setSticky("news")
+     main.addLabelEntry("Date",0,0)
+     main.addButton("Save Date",jumpTo,0,1)
+     main.setSticky("")
+     main.stopLabelFrame()
+     main.setSticky("")
      
-     main.startLabelFrame("Class Data",2,0,4)
+     main.startLabelFrame("Class Data",3,0,4)
      main.setSticky("news")
      main.addListBox("classData",classesName)
      main.setListBoxHeight("classData",15)
-     main.setListBoxWidth("classData",40)
+     main.setListBoxWidth("classData",33)
      main.setSticky("")
      main.stopLabelFrame()
 
-     #main.startLabelFrame("Actions",1,0)
+     main.startLabelFrame("Actions",4,0)
      checkPresent()
      checkAbsent()
      sessionButton()
-     #main.stopLabelFrame()
+     main.stopLabelFrame()
 
      main.setSticky("n")
-     main.startLabelFrame("Jump to Session",4,0,4)
+     main.startLabelFrame("Jump to Session",5,0,4)
      main.setSticky("news")
      main.addLabelEntry("Session Number",0,0)
      main.addButton("Go!",jumpTo,0,1)
