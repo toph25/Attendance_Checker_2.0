@@ -339,12 +339,27 @@ def pressView():
                if classes[index].getattendance(stud,-1) == 1:
                     temp.append(stud.getname())
                     tempS.append(stud.getname())
+
           temp.append("")
           temp.append("Absent:")
+          for stud in classes[index].getstudents():
+               if classes[index].getattendance(stud,-1) == 0:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
+
           temp.append("")
           temp.append("Excused:")
+          for stud in classes[index].getstudents():
+               if classes[index].getattendance(stud,-1) == 2:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
+
           temp.append("")
           temp.append("Late:")
+          for stud in classes[index].getstudents():
+               if classes[index].getattendance(stud,-1) == 3:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
           # display the class details
           main.updateListItems("classData",temp)
           print("current session -> " + str(currentSession))
@@ -396,10 +411,22 @@ def refreshView():
                     tempS.append(stud.getname())
           temp.append("")
           temp.append("Absent:")
+          for stud in classes[classDataDisplay].getstudents():
+               if classes[classDataDisplay].getattendance(stud,currentSession) == 0:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
           temp.append("")
           temp.append("Excused:")
+          for stud in classes[classDataDisplay].getstudents():
+               if classes[classDataDisplay].getattendance(stud,currentSession) == 2:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
           temp.append("")
           temp.append("Late:")
+          for stud in classes[classDataDisplay].getstudents():
+               if classes[classDataDisplay].getattendance(stud,currentSession) == 3:
+                    temp.append(stud.getname())
+                    tempS.append(stud.getname())
           main.updateListItems("classData",temp)
           studentsNames = tempS
 
@@ -451,6 +478,56 @@ def setAbsent(btn):
           #print("student's ID -> " + str(tempI))
           tempS = classes[classDataDisplay].findstudent(tempSN)
           classes[classDataDisplay].setabsence(tempS,currentSession)
+          refreshView()
+
+#setExcused
+#created Feb. 22,2018
+# - sets the selected student's attendance to absent, then updates
+#   the class data being displayed
+# - 1 arg of type string (btn) automatically supplied by the Button for
+#   Absent!, no return values
+# - assume all student names are unique
+# - needs the following to work:
+# ----- the appJar library
+# ----- the file AttendanceChecker.py
+def setExcused(btn):
+     global classDataDisplay
+     #global studentsNames
+     global currentSession
+     print(btn)
+     print("selected " + str(main.getListItems("classData")))
+     if main.getListItems("classData")[0] in studentsNames:
+          tempSN = main.getListItems("classData")[0]
+          print("student's name -> " + str(tempSN))
+          #tempI = studentsNames.index(tempSN)
+          #print("student's ID -> " + str(tempI))
+          tempS = classes[classDataDisplay].findstudent(tempSN)
+          classes[classDataDisplay].setexcuse(tempS,currentSession)
+          refreshView()
+
+#setLate
+#created Feb. 22,2018
+# - sets the selected student's attendance to absent, then updates
+#   the class data being displayed
+# - 1 arg of type string (btn) automatically supplied by the Button for
+#   Absent!, no return values
+# - assume all student names are unique
+# - needs the following to work:
+# ----- the appJar library
+# ----- the file AttendanceChecker.py
+def setLate(btn):
+     global classDataDisplay
+     #global studentsNames
+     global currentSession
+     print(btn)
+     print("selected " + str(main.getListItems("classData")))
+     if main.getListItems("classData")[0] in studentsNames:
+          tempSN = main.getListItems("classData")[0]
+          print("student's name -> " + str(tempSN))
+          #tempI = studentsNames.index(tempSN)
+          #print("student's ID -> " + str(tempI))
+          tempS = classes[classDataDisplay].findstudent(tempSN)
+          classes[classDataDisplay].setlate(tempS,currentSession)
           refreshView()
 
 #prevSession
@@ -547,7 +624,7 @@ def uploadBtn():
      main.setSticky("nw")
      main.setPadding([10,5])
      main.addButton("Upload",pressUpload,0,0)
-     main.setButtonImage("Upload","img\upload.gif")
+     main.setButtonImage("Upload","upload.gif")
      main.setSticky("")
      main.setPadding([0,0])
 
@@ -563,7 +640,7 @@ def viewBtn():
      main.setSticky("nw")
      main.setPadding([10,5])
      main.addButton("View Class",viewTrigger,0,1)
-     main.setButtonImage("View Class","img\\view.gif")
+     main.setButtonImage("View Class","view.gif")
      main.setSticky("")
      main.hideButton("View Class")
      main.setPadding([0,0])
@@ -580,7 +657,7 @@ def deleteBtn():
      main.setPadding([10,5])
      main.setSticky("nw")
      main.addButton("Delete",pressDelete,0,2)
-     main.setButtonImage("Delete","img\delete.gif")
+     main.setButtonImage("Delete","delete.gif")
      main.setSticky("")
      main.hideButton("Delete")
      main.setPadding([0,0])
@@ -594,8 +671,8 @@ def deleteBtn():
 # ----- the appJar library
 def checkPresent():
      main.setPadding([5,00])
-     main.addButton("Present!",setPresent,3,2)
-     main.setButtonImage("Present!","img\present.gif")
+     main.addButton("Present!",setPresent,3,0)
+     main.setButtonImage("Present!","present.gif")
      #main.hideButton("Present!")
      main.setPadding([0,0])
 
@@ -609,7 +686,35 @@ def checkPresent():
 def checkAbsent():
      main.setPadding([5,00])
      main.addButton("Absent!",setAbsent,3,1)
-     main.setButtonImage("Absent!","img\\absent.gif")
+     main.setButtonImage("Absent!","absent.gif")
+     #main.hideButton("Absent!")
+     main.setPadding([0,0])
+
+#checkExcused
+#created Feb. 22, 2018
+# - generates the button for "Excused!"
+# - see setExcused for the effect of pressing the button
+# - no args, no return values
+# - needs the following to work:
+# ----- the appJar library
+def checkExcused():
+     main.setPadding([2,00])
+     main.addButton("Excused!",setExcused,3,2)
+     main.setButtonImage("Excused!","excused.gif")
+     #main.hideButton("Absent!")
+     main.setPadding([0,0])
+
+#checkLate
+#created Feb. 22, 2018
+# - generates the button for "Late!"
+# - see setLate for the effect of pressing the button
+# - no args, no return values
+# - needs the following to work:
+# ----- the appJar library
+def checkLate():
+     main.setPadding([2,00])
+     main.addButton("Late!", setLate,3,3)
+     main.setButtonImage("Late!","late.gif")
      #main.hideButton("Absent!")
      main.setPadding([0,0])
 
@@ -622,14 +727,14 @@ def checkAbsent():
 # ----- the appJar library
 def sessionButton():
      main.setPadding([10,00])
-     main.addButton("Previous Session",prevSession,3,0)
-     main.setButtonImage("Previous Session","img\prev.gif")
+     main.addButton("Previous Session",prevSession,5,0)
+     main.setButtonImage("Previous Session","left.gif")
      #main.hideButton("Previous Session")
      main.setPadding([0,0])
 
      main.setPadding([10,00])
-     main.addButton("Next Session",nextSession,3,3)
-     main.setButtonImage("Next Session","img\\next.gif")
+     main.addButton("Next Session",nextSession,5,1)
+     main.setButtonImage("Next Session","right.gif")
      #main.hideButton("Next Session")
      main.setPadding([0,0])
 
@@ -712,7 +817,7 @@ def vqm():
      main.setStretch("both")
 
      main.setPadding([10,5])
-     main.addImage("qm","img\\format.gif")
+     main.addImage("qm","format.gif")
      
      main.stopSubWindow()
 
@@ -798,17 +903,26 @@ def viewMenu():
      main.startLabelFrame("Actions",4,0)
      checkPresent()
      checkAbsent()
-     sessionButton()
+     checkExcused()
+     checkLate()
      main.stopLabelFrame()
 
-     main.setSticky("n")
-     main.startLabelFrame("Jump to Session",5,0,4)
+     main.startLabelFrame("Sessions",5,0)
+     sessionButton()
      main.setSticky("news")
      main.addLabelEntry("Session Number",0,0)
      main.addButton("Go!",jumpTo,0,1)
      main.setSticky("")
      main.stopLabelFrame()
+     
+     '''main.setSticky("n")
+     main.startLabelFrame("Jump to Session",5,0,2)
+     main.setSticky("news")
+     main.addLabelEntry("Session Number",0,0)
+     main.addButton("Go!",jumpTo,0,1)
      main.setSticky("")
+     main.stopLabelFrame()
+     main.setSticky("")'''
      main.stopSubWindow()
     
 #updateClassNames
@@ -997,7 +1111,8 @@ read_on_startup()
 main = gui("Attendance Checker")
 main.setLocation(100,0)
 main.setFont(14,"Berlin Sans FB")
-main.setBgImage("img\\background.gif")
+main.setImageLocation("img")
+main.setBgImage("background.gif")
 
 menu0()
 upMenu()

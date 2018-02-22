@@ -277,6 +277,25 @@ class Classes:
           #self.attendance[ses][temp] = 0
           self.attendance.set_att(ses,temp,0)
 
+# setexcuse
+# created Feb. 22 2018
+# - sets the specified student in the specified session to absent
+# - needs 2 integer inputs, no output
+     def setexcuse(self,stu,ses):
+          temp = self.students.index(stu)
+          #self.attendance[ses][temp] = 0
+          self.attendance.set_att(ses,temp,2)
+
+# setlate
+# created Feb. 22 2018
+# - sets the specified student in the specified session to absent
+# - needs 2 integer inputs, no output
+     def setlate(self,stu,ses):
+          temp = self.students.index(stu)
+          #self.attendance[ses][temp] = 0
+          self.attendance.set_att(ses,temp,3)
+
+
 # extendattendance
 # created Feb. 13, 2017
 # - appends a new list to the attendance record
