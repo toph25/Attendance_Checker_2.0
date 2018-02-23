@@ -470,11 +470,11 @@ def setAbsent(btn):
           refreshView()
 
 #setExcused
-#created Feb. 22,2018
-# - sets the selected student's attendance to absent, then updates
+#created Feb. 21, 2018
+# - sets the selected student's attendance to excused, then updates
 #   the class data being displayed
 # - 1 arg of type string (btn) automatically supplied by the Button for
-#   Absent!, no return values
+#   Excused!, no return values
 # - assume all student names are unique
 # - needs the following to work:
 # ----- the appJar library
@@ -491,15 +491,15 @@ def setExcused(btn):
           #tempI = studentsNames.index(tempSN)
           #print("student's ID -> " + str(tempI))
           tempS = classes[classDataDisplay].findstudent(tempSN)
-          classes[classDataDisplay].setexcuse(tempS,currentSession)
+          classes[classDataDisplay].setexcused(tempS,currentSession)
           refreshView()
 
 #setLate
-#created Feb. 22,2018
-# - sets the selected student's attendance to absent, then updates
+#created Feb. 21, 2018
+# - sets the selected student's attendance to late, then updates
 #   the class data being displayed
 # - 1 arg of type string (btn) automatically supplied by the Button for
-#   Absent!, no return values
+#   late!, no return values
 # - assume all student names are unique
 # - needs the following to work:
 # ----- the appJar library
