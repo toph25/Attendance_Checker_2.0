@@ -336,7 +336,7 @@ def pressView():
           temp.append("")
           temp.append("Absent:")
           for stud in classes[index].getstudents():
-               if classes[index].getattendance(stud,-1) == 0:
+               if classes[index].getattendance(stud,-1) == 4:
                     temp.append(stud.getname())
                     tempS.append(stud.getname())
 
@@ -401,7 +401,7 @@ def refreshView():
           temp.append("")
           temp.append("Absent:")
           for stud in classes[classDataDisplay].getstudents():
-               if classes[classDataDisplay].getattendance(stud,currentSession) == 0:
+               if classes[classDataDisplay].getattendance(stud,currentSession) == 4:
                     temp.append(stud.getname())
                     tempS.append(stud.getname())
           temp.append("")

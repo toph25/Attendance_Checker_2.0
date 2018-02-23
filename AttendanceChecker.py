@@ -275,7 +275,7 @@ class Classes:
      def setabsence(self,stu,ses):
           temp = self.students.index(stu)
           #self.attendance[ses][temp] = 0
-          self.attendance.set_att(ses,temp,0)
+          self.attendance.set_att(ses,temp,4)
 
 # setexcuse
 # created Feb. 22 2018
