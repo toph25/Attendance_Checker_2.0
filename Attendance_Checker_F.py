@@ -303,28 +303,21 @@ def pressView():
           # get class name
           #temp.append(classes[index].getname())
           # make it the currently viewed class
-          main.setLabel("class_name",classes[index].getname())
-
-          # set # of current session (i.e. the latest one)
-          #    being viewed, zero-indexing already
-          #make it currently viewed session
-          currentSession = classes[index].getsessionnum()
+          main.setLabel("class_name",classes[index].getname())          
           main.setLabel("curr_session","Session " + str(currentSession + 1))
-          
-
      
           # get max number of sessions for the class being viewed, 0-indexing
           try:
                maxSession = int(classes[index].getmaxsessionnum()) - 1
           except TypeError:
                maxSession = Ellipsis
-          print("max sessions for this class -> " + str(maxSession))
-          temp.append("Session " + str(currentSession + 1))
-          temp.append("")
+          # print("max sessions for this class -> " + str(maxSession))
+          # temp.append("Session " + str(currentSession + 1))
+          # temp.append("")
           # get list of present and absent students in latest session
           # Updated: Feb. 13, 2018
           # Improvement Number: 2.4
-          temp.append("")
+          # temp.append("")
           temp.append("Class List:")
           for stud in classes[index].getstudents():
                if classes[index].getattendance(stud,-1) == 0:
@@ -388,10 +381,6 @@ def refreshView():
           print("classes index -> " + str(classDataDisplay))
 
           main.setLabel("curr_session","Session " + str(currentSession + 1))
-          
-          temp.append("Session " + str(currentSession + 1))
-
-
           # Updated: Feb. 13,2018
           # Improvement Number: 2.4
 
@@ -583,6 +572,12 @@ def nextSession(btn):
      else:
           print("can't go further forward")
           main.errorBox("Error","You can't go further forward in this class.")
+
+
+def saveDate(btn):
+     global currentSession
+     date = main.getEntry("Date")
+     print(date)
 
 #jumpTo
 #created March 13, 2017
@@ -887,7 +882,7 @@ def viewMenu():
      main.startLabelFrame("",2,0,4)
      main.setSticky("news")
      main.addLabelEntry("Date",0,0)
-     main.addButton("Save Date",jumpTo,0,1)
+     main.addButton("Save Date",saveDate,0,1)
      main.setSticky("")
      main.stopLabelFrame()
      main.setSticky("")
