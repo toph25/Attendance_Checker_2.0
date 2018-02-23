@@ -272,6 +272,8 @@ class Classes:
 # created Feb. 26, 2017
 # - sets the specified student in the specified session to absent
 # - needs 2 integer inputs, no output
+# edited Feb. 23, 2018
+# - absent student indicator - changed 0 to 4
      def setabsence(self,stu,ses):
           temp = self.students.index(stu)
           #self.attendance[ses][temp] = 0
