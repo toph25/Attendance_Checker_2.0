@@ -277,22 +277,22 @@ class Classes:
           #self.attendance[ses][temp] = 0
           self.attendance.set_att(ses,temp,4)
 
-# setexcuse
-# created Feb. 22 2018
-# - sets the specified student in the specified session to absent
+# setexcused
+# created Feb. 21, 2018
+# - sets the specified student in the specified session to excused
 # - needs 2 integer inputs, no output
-     def setexcuse(self,stu,ses):
+     def setexcused(self,stu,ses):
           temp = self.students.index(stu)
-          #self.attendance[ses][temp] = 0
+          #self.attendance[ses][temp] = 1
           self.attendance.set_att(ses,temp,2)
 
 # setlate
-# created Feb. 22 2018
-# - sets the specified student in the specified session to absent
+# created Feb. 21, 2018
+# - sets the specified student in the specified session to late
 # - needs 2 integer inputs, no output
      def setlate(self,stu,ses):
           temp = self.students.index(stu)
-          #self.attendance[ses][temp] = 0
+          #self.attendance[ses][temp] = 1
           self.attendance.set_att(ses,temp,3)
 
 
