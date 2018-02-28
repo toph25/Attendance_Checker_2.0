@@ -93,6 +93,13 @@ class AttendanceR:
           for i in self.record:
                i.append(0)
 
+# add_newDate
+# created Feb. 28, 2018
+# - adds null column for new date
+     def add_newDate(self):
+          for i in self.record:
+               i.append('\0')
+
 #retrieve
 #created Mar. 23, 2017
 # - returns the attendance record of a given student b in a given session a
@@ -239,6 +246,12 @@ class Classes:
           elif self.attendance.get_recordLength() > 0:
                self.attendance.add_newStudent()
 
+# add_date
+# created Feb. 28, 2018
+# - adds date column on savefile.txt
+     def add_date(self):
+          self.attendance.add_newDate()
+
 # getattendance
 # created Jan. 30, 2017
 # - gets the attendance status of a particular student in a particular
@@ -297,7 +310,14 @@ class Classes:
           #self.attendance[ses][temp] = 1
           self.attendance.set_att(ses,temp,3)
 
-
+# setDate
+# created Feb. 28, 2018
+# - sets date for certain session
+     def setDate(self, ses, date):
+          temp = len(self.students)
+          print (ses, temp, date)
+          self.attendance.set_att(ses,temp,date)
+          
 # extendattendance
 # created Feb. 13, 2017
 # - appends a new list to the attendance record
@@ -324,6 +344,8 @@ def stringify(li):
 # - Students are generated with ID and name taken from the student record
 #   file
 # - needs 1 list of Classes, 2 strings, and 1 integer; returns 1 integer output
+# updated Feb. 28, 2018
+# - add column for date on savefile.txt
 
 # csv fields must be arranged like this: ID, Lastname, Firstname
 # all IDs must be unique
@@ -370,6 +392,7 @@ def AddClass(aList,name,sessions,studentfile):
                     print("Found a character")
                     tok.append(i)
      #reached the end of the file
+     x.add_date()
      print("Found the end of the file")
      sfile.close()
      #name = stringify(tok)

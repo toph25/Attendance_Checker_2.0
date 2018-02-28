@@ -65,6 +65,7 @@ from AttendanceChecker import *
 from random import randint
 import os.path
 import Tkinter
+import datetime
 Tkinter.wantobjects = False
 
 #pressUpload
@@ -573,11 +574,30 @@ def nextSession(btn):
           print("can't go further forward")
           main.errorBox("Error","You can't go further forward in this class.")
 
+# validDate
+# created Feb 28,2018
+# -check date format
+def validDate(datestring):
+    try:
+        datetime.datetime.strptime(datestring, '%m/%d/%Y')
+        return True
+    except ValueError:
+        return False
 
+# saveDate
+# created Feb 28,2018
+# -save date on the file
+# -pop up if invalid format
 def saveDate(btn):
      global currentSession
+     global classDataDisplay
      date = main.getEntry("Date")
      print(date)
+     if validDate(date):
+          classes[classDataDisplay].setDate(currentSession, date)
+          main.infoBox("Success","The date for Session " + str(currentSession+1) + " has been updated to " + str(date) + ".")
+     else:
+          main.errorBox("Error","Please enter date in the format MM/DD/YYYY.")
 
 #jumpTo
 #created March 13, 2017
@@ -586,7 +606,7 @@ def saveDate(btn):
 # - no input, no output
 # - needs the following to work:
 # ---- the appJar library
-# ---- see the other function's details for its requirements
+# --- see the other function's details for its requirements
 def jumpTo(btn):
      global currentSession
      ses = main.getEntry("Session Number")
@@ -956,6 +976,8 @@ def updateClassNames():
 # - needs the following:
 # ---- savefile.txt (optional)
 # ---- AttendanceChecker.py
+# updated Feb. 28,2018
+# - for date on file, changed len to len-1
 
 #format of savefile
 # -----
@@ -1029,7 +1051,7 @@ def read_on_startup():
                for j in range(currS): #not zero-indexed
                     entry = f.readline()
                     entry = entry.split()
-                    for k in range(len(entry)):
+                    for k in range(len(entry)-1):
                          entry[k] = int(entry[k])
                     print("got attendance entry " + str(entry))
                     att.append(entry)
